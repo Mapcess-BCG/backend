@@ -11,17 +11,23 @@ feedback_table = db.Table('Feedback')
 
 # get feedback along the route
 def getFeedbackAlongTheRoute(polyline):
+    result = []
     filter_expression = getFilterExpression(polyline[0])
-    for index, coordinate in enumerate(polyline):
-        if index % 3 == 0:
+
+    chunk_size = 50
+
+    # Split the original array into multiple partitions
+    partitions = list(split_array(polyline, chunk_size))
+
+    for partition in partitions:
+        for index, coordinate in enumerate(partition):
             filter_expression = filter_expression | getFilterExpression(coordinate)
 
+        result.extend(feedback_table.scan(
+            FilterExpression=filter_expression
+        )['Items'])
 
-    feedback_on_path = feedback_table.scan(
-        FilterExpression=filter_expression
-    )['Items']
-
-    return feedback_on_path
+    return result
     '''feedback_on_route = []
     # for test purposes:
     default_origin = "BCG Düsseldorf"
@@ -57,3 +63,8 @@ def getFilterExpression(coordinate):
     #print(coordinate[1])
     return Attr("feed_coordinate_long").between(Decimal(coordinate[1]) - Decimal('0.00002'), Decimal(coordinate[1]) + Decimal('0.00002')) \
            & Attr("feed_coordinate_lat").between(Decimal(coordinate[0]) - Decimal('0.00002'), Decimal(coordinate[0]) + Decimal('0.00002'))
+
+
+def split_array(arr, chunk_size):
+    for i in range(0, len(arr), chunk_size):
+        yield arr[i:i + chunk_size]

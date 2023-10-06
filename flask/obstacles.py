@@ -25,23 +25,6 @@ def getObstaclesForPolyline(polyline):
     return obstacles_on_the_way
 
 
-# DO we integrate Google map in the back or front?
-def getAllObstaclesOnTheWay(start, end):
-    db = boto3.resource('dynamodb',
-                        region_name='eu-central-1',
-                        aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
-                        aws_secret_access_key='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')
-    obstacles_table = db.Table('Obstacles')
-    obstacles_on_the_way = obstacles_table.scan(
-        FilterExpression=(
-                             Attr("obs_coordinate_long").gte(Decimal(start.split(':')[1]) + Decimal('0.00002'))
-                         & Attr("obs_coordinate_long").lte(Decimal(start.split(':')[1]) + Decimal('0.00002'))
-        )
-    )['Items']
-
-    return obstacles_on_the_way
-
-
 def getAllObstacles():
     db = boto3.resource('dynamodb',
                     region_name='eu-central-1',
@@ -51,12 +34,8 @@ def getAllObstacles():
     print(tTable.scan()['Items'])
 
 # TODO: to implement
-def postObstacle():
-    db = boto3.resource('dynamodb',
-                    region_name='eu-central-1',
-                    aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
-                    aws_secret_access_key='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')
-    tTable = db.Table('Obstacles')
+# def postObstacle():
+#     db.
 
 
 
