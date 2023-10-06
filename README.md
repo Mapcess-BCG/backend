@@ -76,3 +76,11 @@ Stop and remove the containers
 ```
 $ docker compose down
 ```
+
+
+# Our testing data:
+An amazing 2,5 walk from the BCG office to the nearest CurryWurst place
+
+start: 51.226667, 6.779665
+
+end: 51.215700, 6.758410
