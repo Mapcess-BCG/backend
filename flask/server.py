@@ -35,6 +35,13 @@ def get_directions():
 def getFeedback():
     return jsonify({'feedback': getFeedbackAlongTheRoute()})
 
+@app.route('/feedback', methods=['POST'])
+def postFeedback():
+    data = request.get_json()
+    postFeedback(data)
+    print("Success")
+
+
 @app.route('/routes', methods=['GET'])
 def getRoute():
     origin = request.args.get('origin', type=str)

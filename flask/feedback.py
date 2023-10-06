@@ -7,6 +7,10 @@ db = boto3.resource('dynamodb',
                     region_name='eu-central-1',
                     aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
                     aws_secret_access_key='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')
+db_client = boto3.client('dynamodb',
+                        region_name='eu-central-1',
+                        aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
+                        aws_secret_access_key='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')
 feedback_table = db.Table('Feedback')
 
 # get feedback along the route
@@ -30,6 +34,37 @@ def getFeedbackAlongTheRoute(polyline):
         filter_expression = getFilterExpression(polyline[0])
 
     return result
+
+def postFeedback(data):
+    db_client.put_item(TableName='Feedback', 
+                       Item=
+                       {
+                            "id": {
+                                "S": data['id']
+                            },
+                            "feed_comment": {
+                                "S": data['feed_comment']
+                            },
+                            "feed_coordinate_lat": {
+                                "N": data['feed_coordinate_lat']
+                            },
+                            "feed_coordinate_long": {
+                                "N": data['feed_coordinate_long']
+                            },
+                            "feed_created": {
+                                "S": data['feed_created']
+                            },
+                            "feed_problem": {
+                                "S": data['feed_problem']
+                            },
+                            "feed_score": {
+                                "S": data['feed_score']
+                            },
+                            "path_id": {
+                                "S": data['path_id']
+                            }
+                        })
+    return 
     '''feedback_on_route = []
     # for test purposes:
     default_origin = "BCG Düsseldorf"
