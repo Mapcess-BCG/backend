@@ -29,11 +29,8 @@ def getAllObstaclesOnTheWay(start, end):
     db = boto3.resource('dynamodb', region_name='eu-central-1')
     obstacles_table = db.Table('Obstacles')
     obstacles_on_the_way = obstacles_table.scan(
-        FilterExpression=(
-                             Attr("obs_coordinate_long").gte(Decimal(start.split(':')[1]) + Decimal('0.00002'))
-                         & Attr("obs_coordinate_long").lte(Decimal(start.split(':')[1]) + Decimal('0.00002'))
-        )
-    )['Items']
+        FilterExpression=Attr("obs_coordinate_long").gte(Decimal(start.split['1']) + Decimal('0.00002'))) & Attr("obs_coordinate_long").lte(Decimal(start.split['1']) + Decimal('0.00002'))
+    ['Items']
 
     return obstacles_on_the_way
 
@@ -53,7 +50,7 @@ def postObstacle():
 def getFilterExpression(coordinate):
     print(coordinate.split(':'))
     print(Decimal(coordinate.split(':')[1]))
-    
+
     return Attr("obs_coordinate_long").gte(Decimal(coordinate.split(':')[1]) + Decimal('0.00002')) \
            & Attr("obs_coordinate_long").lte(Decimal(coordinate.split(':')[1]) + Decimal('0.00002')) \
            & Attr("obs_coordinate_lat").gte(Decimal(coordinate.split(':')[0]) + Decimal('0.00002')) \
