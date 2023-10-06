@@ -1,22 +1,23 @@
 import requests
 import polyline
 from flask import Flask, request, jsonify
+# from map_utils import is_location_on_polyline
 
 GOOGLE_DIRECTIONS_API_URL = "https://maps.googleapis.com/maps/api/directions/json"
 GOOGLE_API_KEY = "AIzaSyAWEPohy9CdHpz6j8-_zLDRsSWoDI9b2YU"
 
-def fetch_directions(origin, destination):
+def get_polylines(origin, destination):
     # Default values for origin and destination
     # TODO: REMOVE once frontend input is possible
 
     if not origin or not destination:
         return jsonify({'error': 'Origin and Destination are required'}), 400
-    
+
     if not origin:
         origin = "BCG Düsseldorf"
     if not destination:
         destination = "Curry, Hammer Str. 2, 40219 Düsseldorf"
-    
+
     params = {
         'origin': origin,
         'destination': destination,
