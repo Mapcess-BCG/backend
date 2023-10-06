@@ -9,9 +9,6 @@ def goEatCurryWurst():
 
     polylines = get_polylines(default_origin, default_destination)
 
-    print("polylines")
-    print(polylines)
-
     for polyline in polylines:
         obstacles = getObstaclesForPolyline(polyline)
         print("Found obstacles:")
