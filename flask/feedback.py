@@ -7,8 +7,19 @@ db = boto3.resource('dynamodb', region_name='eu-central-1')
 feedback_table = db.Table('Feedback')
 
 # get feedback along the route
-def getFeedbackAlongTheRoute():
-    feedback_on_route = []
+def getFeedbackAlongTheRoute(polyline):
+    filter_expression = getFilterExpression(polyline[0])
+    for index, coordinate in enumerate(polyline):
+        if index % 3 == 0:
+            filter_expression = filter_expression | getFilterExpression(coordinate)
+
+
+    feedback_on_path = feedback_table.scan(
+        FilterExpression=filter_expression
+    )['Items']
+
+    return feedback_on_path
+    '''feedback_on_route = []
     # for test purposes:
     default_origin = "BCG Düsseldorf"
     default_destination = "Curry, Hammer Str. 2, 40219 Düsseldorf"
@@ -19,7 +30,7 @@ def getFeedbackAlongTheRoute():
     #iterating through polylines
     for polyline in polylines:
 
-        filter_expression = getFilterExpression(polyline[0])
+        filter_expression = getFilterExpression(polyline)
         #print(filter_expression)
         for index, coordinate in polyline:
             if index % 3 == 0:
@@ -35,7 +46,7 @@ def getFeedbackAlongTheRoute():
     #print(feedback_on_route)
 
     return feedback_on_route
-
+'''
 
 def getFilterExpression(coordinate):
     #print(coordinate.split(':'))
