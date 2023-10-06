@@ -36,34 +36,18 @@ def getFeedbackAlongTheRoute(polyline):
     return result
 
 def postFeedback(data):
+    transformed_data = {
+        "id": {"S": data['id'] },
+        "feed_comment": {"S": data['feed_comment']},
+        "feed_coordinate_lat": {"N": data["feed_coordinate_lat"]},
+        "feed_coordinate_long": {"N": data["feed_coordinate_long"]},
+        "feed_created": {"S": data["feed_created"]},
+        "feed_problem": {"S": data["feed_problem"]},
+        "feed_score": {"S": data["feed_score"]}
+    }
+
     feedback = db_client.put_item(TableName='Feedback', 
-                       Item=
-                       {
-                            "id": {
-                                "S": data['id']
-                            },
-                            "feed_comment": {
-                                "S": data['feed_comment']
-                            },
-                            "feed_coordinate_lat": {
-                                "N": data['feed_coordinate_lat']
-                            },
-                            "feed_coordinate_long": {
-                                "N": data['feed_coordinate_long']
-                            },
-                            "feed_created": {
-                                "S": data['feed_created']
-                            },
-                            "feed_problem": {
-                                "S": data['feed_problem']
-                            },
-                            "feed_score": {
-                                "S": data['feed_score']
-                            },
-                            "path_id": {
-                                "S": data['path_id']
-                            }
-                        })
+                       Item=transformed_data)
     return feedback
 
 def getFilterExpression(coordinate):
