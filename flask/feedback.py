@@ -14,8 +14,7 @@ def getFeedbackAlongTheRoute(polyline):
     result = []
     filter_expression = getFilterExpression(polyline[0])
 
-    chunk_size = 50
-
+    chunk_size = 10
 
     # Split the original array into multiple partitions
     partitions = list(split_array(polyline, chunk_size))

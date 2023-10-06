@@ -9,7 +9,7 @@ def get_elevations(points):
     # print(f"Location str: {locations_str}")
     endpoint = f"https://maps.googleapis.com/maps/api/elevation/json?locations={locations_str}&key={GOOGLE_API_KEY}"
     response = requests.get(endpoint)
-    print(f"Response str: {response.json()}")
+    # print(f"Response str: {response.json()}")
     if response.status_code == 200:
         results = response.json().get('results', [])
         return [r['elevation'] for r in results]
@@ -47,16 +47,17 @@ def calculate_elevation_score(segment_polyline):
     return elevation_score
 
 def calculate_feedback_score(segment_polyline):
-    result = getFeedbackAlongTheRoute(segment_polyline)
-    print(f"Feedback res: {result}")
-    feedback_array = result[0]
-
     scores = []
+    result = getFeedbackAlongTheRoute(segment_polyline)
+    for res in result:
+        print(f"Feedback res: {res}")
+        if res["feed_score"] != None:
+            scores.append(int(res["feed_score"]))
 
-    for feedback in feedback_array:
-        scores.append(feedback["feed_score"])
-
-    return scores
+    if len(scores)>0:
+        return scores
+    else:
+        return None
 
 def calculate_score(polyline):
 
@@ -65,9 +66,16 @@ def calculate_score(polyline):
 
     for segment_polyline in polyline:
         elevation_scores.append(calculate_elevation_score(segment_polyline))
-        feedback_scores.append(calculate_feedback_score(segment_polyline))
+        feedback_res = calculate_feedback_score(segment_polyline)
+        if feedback_res != None:
+            feedback_scores.extend(feedback_res)
 
-    accessibility_score = np.mean(np.mean(elevation_scores), np.mean(feedback_scores))
+    if len(feedback_scores) > 0:
+        mean_elevation = np.mean(elevation_scores)
+        mean_feedback = np.mean(feedback_scores)
+        accessibility_score = (mean_elevation + mean_feedback) / 2
+    else:
+        accessibility_score = np.mean(elevation_scores)
 
     return accessibility_score
 
