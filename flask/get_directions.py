@@ -32,7 +32,9 @@ def fetch_directions(origin, destination):
         steps_list = api_response.json()['routes'][0]['legs'][0]['steps']
         polylines = [steps_list[i]["polyline"]["points"] for i in range(0, len(steps_list))]
         # return get_elevation(steps_list), polylines
-        return api_response.json()
+        polylines = [polyline.decode(steps_list[i]["polyline"]["points"]) for i in range(0, len(steps_list))]
+
+        return polylines
     else:
         return {'error': 'Failed to fetch directions'}, 500
     
