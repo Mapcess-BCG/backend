@@ -10,6 +10,7 @@ from obstacles import getAllObstaclesOnTheWay, getAllObstacles
 from polylines import get_polylines
 from feedback import getFeedbackAlongTheRoute
 
+
 app = Flask(__name__)
 
 client = MongoClient("mongo:27017")
@@ -41,7 +42,7 @@ def get_directions():
 
 @app.route('/feedback', methods=['GET'])
 def getFeedback():
-    return jsonify({'feedback': getFeedbackAlongTheRoute(1)})
+    return jsonify({'feedback': getFeedbackAlongTheRoute()})
 
 @app.route('/test', methods=['GET'])
 def runTest():
