@@ -20,17 +20,9 @@ def todo():
 
 @app.route('/directions', methods=['GET'])
 def get_directions():
-    # Default values for origin and destination
-    # TODO: REMOVE once frontend input is possible
-    default_origin = "BCG Düsseldorf"
-    default_destination = "Curry, Hammer Str. 2, 40219 Düsseldorf"
-
     # Get origin and destination from query parameters or use defaults
-    origin = request.args.get('origin', default_origin)
-    destination = request.args.get('destination', default_destination)
-
-    if not origin or not destination:
-        return jsonify({'error': 'Origin and Destination are required'}), 400
+    origin = request.args.get('origin', type=str)
+    destination = request.args.get('destination', type=str)
 
     return fetch_directions(origin, destination)
 
@@ -41,7 +33,6 @@ def getObstacles():
     end = request.args.get('end', type=str)
 
     return jsonify({'obstacles': getAllObstaclesOnTheWay(start, end)})
-
 
 if __name__ == "__main__":
     getAllObstacles()
