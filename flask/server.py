@@ -6,11 +6,8 @@ from pymongo import MongoClient
 
 from bcg_to_currywurst_test import goEatCurryWurst
 from obstacles import getAllObstaclesOnTheWay, getAllObstacles
-<<<<<<< HEAD
 from polylines import get_polylines
-=======
 from feedback import getFeedbackAlongTheRoute
->>>>>>> 95fb4ad (modified server)
 
 app = Flask(__name__)
 
@@ -43,16 +40,13 @@ def getObstacles():
 
 @app.route('/feedback', methods=['GET'])
 def getFeedback():
+    return jsonify({'feedback': getFeedbackAlongTheRoute(1)})
 
-<<<<<<< HEAD
 @app.route('/test', methods=['GET'])
 def runTest():
     goEatCurryWurst()
     return jsonify({'output': "worked"})
 
-=======
-    return jsonify({'feedback': getFeedbackAlongTheRoute(1)})
->>>>>>> 95fb4ad (modified server)
 
 if __name__ == "__main__":
     getAllObstacles()
