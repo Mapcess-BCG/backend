@@ -41,6 +41,7 @@ def getObstacles():
 @app.route('/test', methods=['GET'])
 def runTest():
     goEatCurryWurst()
+    return jsonify({'output': "worked"})
 
 
 if __name__ == "__main__":
