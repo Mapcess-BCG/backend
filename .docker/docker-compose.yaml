@@ -18,8 +18,12 @@ services:
     stop_signal: SIGINT
     environment:
       - FLASK_SERVER_PORT=9091
+      - AWS_ACCESS_KEY_ID="AKIAUOE65TFG6UZKDCWO"
+      - AWS_SECRET_ACCESS_KEY="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"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - ./.aws/credentials
       # - ./.aws/credentials:/home/app/.aws/credentials:ro
     depends_on:
       -  mongo  

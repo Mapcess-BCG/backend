@@ -3,7 +3,10 @@ from boto3.dynamodb.conditions import Attr
 from decimal import Decimal
 
 # TODO: optimize -> move to the server file and make it global
-db = boto3.resource('dynamodb', region_name='eu-central-1')
+db = boto3.resource('dynamodb',
+                    region_name='eu-central-1',
+                    aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
+                    aws_secret_access_key='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')
 obstacles_table = db.Table('Obstacles')
 
 
@@ -24,7 +27,10 @@ def getObstaclesForPolyline(polyline):
 
 # DO we integrate Google map in the back or front?
 def getAllObstaclesOnTheWay(start, end):
-    db = boto3.resource('dynamodb', region_name='eu-central-1')
+    db = boto3.resource('dynamodb',
+                        region_name='eu-central-1',
+                        aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
+                        aws_secret_access_key='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')
     obstacles_table = db.Table('Obstacles')
     obstacles_on_the_way = obstacles_table.scan(
         FilterExpression=(
@@ -37,13 +43,19 @@ def getAllObstaclesOnTheWay(start, end):
 
 
 def getAllObstacles():
-    db = boto3.resource('dynamodb', region_name='eu-central-1')
+    db = boto3.resource('dynamodb',
+                    region_name='eu-central-1',
+                    aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
+                    aws_secret_access_key='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')
     tTable = db.Table('Obstacles')
     print(tTable.scan()['Items'])
 
 # TODO: to implement
 def postObstacle():
-    db = boto3.resource('dynamodb', region_name='eu-central-1')
+    db = boto3.resource('dynamodb',
+                    region_name='eu-central-1',
+                    aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
+                    aws_secret_access_key='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')
     tTable = db.Table('Obstacles')
 
 

@@ -3,7 +3,10 @@ from boto3.dynamodb.conditions import Attr
 from decimal import Decimal
 from polylines import get_polylines
 
-db = boto3.resource('dynamodb', region_name='eu-central-1')
+db = boto3.resource('dynamodb',
+                    region_name='eu-central-1',
+                    aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
+                    aws_secret_access_key='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')
 feedback_table = db.Table('Feedback')
 
 # get feedback along the route

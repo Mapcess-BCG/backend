@@ -6,10 +6,15 @@ COPY requirements.txt /src
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install -r requirements.txt
 
-RUN mkdir -p /home/.aws && \
-    echo "[default]" > /home/.aws/credentials && \
+# RUN mkdir -p /home/.aws && \
+#     echo "[default]" > /home/.aws/credentials && \
+#     echo "aws_access_key_id = AKIAUOE65TFG6UZKDCWO" >> /home/.aws/credentials  && \
+#     echo "aws_secret_access_key = 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" >> /home/.aws/credentials
 
-RUN chmod 600 /home/.aws/credentials
+# RUN mkdir -p /home/app/.aws && \
+#     echo "[default]" > /home/app/.aws/credentials && \
+#     echo "aws_access_key_id = AKIAUOE65TFG6UZKDCWO" >> /home/app/.aws/credentials  && \
+#     echo "aws_secret_access_key = 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" >> /home/app/.aws/credentials
 
 COPY . .
 
@@ -27,6 +32,8 @@ addgroup -S docker
 adduser -S --shell /bin/bash --ingroup docker vscode
 EOF
 
+ENV AWS_ACCESS_KEY_ID=AKIAUOE65TFG6UZKDCWO
+ENV AWS_SECRET_ACCESS_KEY=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
 
 # install Docker tools (cli, buildx, compose)
 COPY --from=gloursdocker/docker / /
