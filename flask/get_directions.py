@@ -21,7 +21,8 @@ def fetch_directions(origin, destination):
         'origin': origin,
         'destination': destination,
         'key': GOOGLE_API_KEY,
-        'mode': 'walking'
+        'mode': 'walking',
+        "alternatives": 'true'
     }
 
     api_response = requests.get(GOOGLE_DIRECTIONS_API_URL, params=params)
