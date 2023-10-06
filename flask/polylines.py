@@ -8,8 +8,8 @@ def get_polylines(origin, destination):
     # Default values for origin and destination
     # TODO: REMOVE once frontend input is possible
 
-    # if not origin or not destination:
-    #     return jsonify({'error': 'Origin and Destination are required'}), 400
+    if not origin or not destination:
+        return jsonify({'error': 'Origin and Destination are required'}), 400
 
     if not origin:
         origin = "BCG Düsseldorf"
@@ -38,7 +38,6 @@ def get_polylines(origin, destination):
             route_score = calculate_score(route_polylines)
             routes_dict[str(route)] = route_score
         return routes_dict
-    
+
     else:
         return {'error': 'Failed to fetch directions'}, 500
-    
