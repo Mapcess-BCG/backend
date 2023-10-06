@@ -1,4 +1,5 @@
 .idea
 bcg
 flask/__pycache__
+.env
 
