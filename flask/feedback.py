@@ -26,6 +26,8 @@ def getFeedbackAlongTheRoute(polyline):
         result.extend(feedback_table.scan(
             FilterExpression=filter_expression
         )['Items'])
+        filter_expression = getFilterExpression(polyline[0])
+
 
     return result
     '''feedback_on_route = []
