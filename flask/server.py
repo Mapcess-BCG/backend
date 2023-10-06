@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 from bcg_to_currywurst_test import goEatCurryWurst
 from obstacles import getAllObstaclesOnTheWay, getAllObstacles
-from get_directions import fetch_directions
+from polylines import get_polylines
 
 app = Flask(__name__)
 
@@ -27,7 +27,7 @@ def get_directions():
     origin = request.args.get('origin', type=str)
     destination = request.args.get('destination', type=str)
 
-    return fetch_directions(origin, destination)
+    return get_polylines(origin, destination)
 
 # start and end parameters are coordinates in form "lat:lon"
 @app.route('/obstacles', methods=['GET'])

@@ -1,12 +1,12 @@
 from obstacles import getObstaclesForPolyline
-from get_directions import fetch_directions
+from polylines import get_polylines
 
 
 def goEatCurryWurst():
     default_origin = "BCG Düsseldorf"
     default_destination = "Curry, Hammer Str. 2, 40219 Düsseldorf"
 
-    polylines = fetch_directions(default_origin, default_destination)
+    polylines = get_polylines(default_origin, default_destination)
 
     print(polylines)
 

@@ -6,7 +6,7 @@ from flask import Flask, request, jsonify
 GOOGLE_DIRECTIONS_API_URL = "https://maps.googleapis.com/maps/api/directions/json"
 GOOGLE_API_KEY = "AIzaSyAWEPohy9CdHpz6j8-_zLDRsSWoDI9b2YU"
 
-def fetch_directions(origin, destination):
+def get_polylines(origin, destination):
     # Default values for origin and destination
     # TODO: REMOVE once frontend input is possible
 
