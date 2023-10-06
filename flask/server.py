@@ -3,6 +3,8 @@ import os
 
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
+
+from bcg_to_currywurst_test import goEatCurryWurst
 from obstacles import getAllObstaclesOnTheWay, getAllObstacles
 from get_directions import fetch_directions
 
@@ -18,6 +20,7 @@ def todo():
         return "Server not available"
     return "Hello from the MongoDB client!\n"
 
+# returns a list of polylines
 @app.route('/directions', methods=['GET'])
 def get_directions():
     # Default values for origin and destination
@@ -41,6 +44,11 @@ def getObstacles():
     end = request.args.get('end', type=str)
 
     return jsonify({'obstacles': getAllObstaclesOnTheWay(start, end)})
+
+
+@app.route('/test', methods=['GET'])
+def runTest():
+    goEatCurryWurst()
 
 
 if __name__ == "__main__":

@@ -1,5 +1,4 @@
 import requests
-import polyline
 # from map_utils import is_location_on_polyline
 
 GOOGLE_DIRECTIONS_API_URL = "https://maps.googleapis.com/maps/api/directions/json"
