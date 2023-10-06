@@ -6,6 +6,11 @@ COPY requirements.txt /src
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install -r requirements.txt
 
+RUN mkdir -p /home/.aws && \
+    echo "[default]" > /home/.aws/credentials && \
+
+RUN chmod 600 /home/.aws/credentials
+
 COPY . .
 
 CMD ["python3", "server.py"]
@@ -21,6 +26,7 @@ RUN <<EOF
 addgroup -S docker
 adduser -S --shell /bin/bash --ingroup docker vscode
 EOF
+
 
 # install Docker tools (cli, buildx, compose)
 COPY --from=gloursdocker/docker / /

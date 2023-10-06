@@ -20,6 +20,7 @@ services:
       - FLASK_SERVER_PORT=9091
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      # - ./.aws/credentials:/home/app/.aws/credentials:ro
     depends_on:
       -  mongo  
 
