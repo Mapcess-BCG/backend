@@ -8,7 +8,7 @@ from bcg_to_currywurst_test import goEatCurryWurst
 from integration import getAllRoutes
 from obstacles import getAllObstacles, postObstacle
 from polylines import get_polylines
-from feedback import getFeedbackAlongTheRoute
+from feedback import getFeedbackAlongTheRoute, postFeedback
 
 
 app = Flask(__name__)
@@ -34,6 +34,11 @@ def get_directions():
 @app.route('/feedback', methods=['GET'])
 def getFeedback():
     return jsonify({'feedback': getFeedbackAlongTheRoute()})
+
+@app.route('/feedback', methods=['POST'])
+def feedback():
+    return postFeedback(request.get_json())
+
 
 @app.route('/routes', methods=['GET'])
 def getRoute():
