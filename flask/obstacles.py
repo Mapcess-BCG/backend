@@ -43,9 +43,11 @@ def getAllObstacles():
     tTable = db.Table('Obstacles')
     print(tTable.scan()['Items'])
 
+# TODO: to implement
 def postObstacle():
     db = boto3.resource('dynamodb', region_name='eu-central-1')
     tTable = db.Table('Obstacles')
+
 
 
 def getFilterExpression(coordinate):

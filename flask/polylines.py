@@ -30,8 +30,7 @@ def fetch_directions(origin, destination):
     if api_response.status_code == 200:
         # Extract polylines
         steps_list = api_response.json()['routes'][0]['legs'][0]['steps']
-        polylines = [steps_list[i]["polyline"]["points"] for i in range(0, len(steps_list))]
-        # return get_elevation(steps_list), polylines
+        polylines = [polyline.decode(steps_list[i]["polyline"]["points"]) for i in range(0, len(steps_list))]        # return get_elevation(steps_list), polylines
         return api_response.json()
     else:
         return {'error': 'Failed to fetch directions'}, 500
