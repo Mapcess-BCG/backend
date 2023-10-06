@@ -37,9 +37,7 @@ def getFeedback():
 
 @app.route('/feedback', methods=['POST'])
 def postFeedback():
-    data = request.get_json()
-    postFeedback(data)
-    print("Success")
+    return postFeedback(request.get_json())
 
 
 @app.route('/routes', methods=['GET'])
