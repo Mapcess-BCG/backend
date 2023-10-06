@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify
 from pymongo import MongoClient
 
 from bcg_to_currywurst_test import goEatCurryWurst
+from integration import getAllRoutes
 from obstacles import getAllObstaclesOnTheWay, getAllObstacles
 from polylines import get_polylines
 from feedback import getFeedbackAlongTheRoute
@@ -31,12 +32,12 @@ def get_directions():
     return get_polylines(origin, destination)
 
 # start and end parameters are coordinates in form "lat:lon"
-@app.route('/obstacles', methods=['GET'])
-def getObstacles():
-    start = request.args.get('start', type=str)
-    end = request.args.get('end', type=str)
-
-    return jsonify({'obstacles': getAllObstaclesOnTheWay(start, end)})
+# @app.route('/obstacles', methods=['GET'])
+# def getObstacles():
+#     start = request.args.get('start', type=str)
+#     end = request.args.get('end', type=str)
+#
+#     return jsonify({'obstacles': getAllObstaclesOnTheWay(start, end)})
 
 @app.route('/feedback', methods=['GET'])
 def getFeedback():
@@ -47,6 +48,12 @@ def runTest():
     goEatCurryWurst()
     return jsonify({'output': "worked"})
 
+
+@app.route('/routes', methods=['GET'])
+def getRoute():
+    origin = request.args.get('origin', type=str)
+    destination = request.args.get('destination', type=str)
+    return getAllRoutes(origin, destination)
 
 if __name__ == "__main__":
     getAllObstacles()

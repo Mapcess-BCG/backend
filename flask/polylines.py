@@ -31,13 +31,14 @@ def get_polylines(origin, destination):
 
         # Create dict {route, accessibility_score}
         # Evaluate main route plus alternatives
-        routes_dict = {}
-        for route in routes:
-            steps_list = route['legs'][0]['steps']
-            route_polylines = [polyline.decode(steps_list[i]["polyline"]["points"]) for i in range(0, len(steps_list))]
-            route_score = calculate_score(route_polylines)
-            routes_dict[str(route)] = route_score
-        return routes_dict
+        return routes
+        # routes_dict = {}
+        # for route in routes:
+        #     steps_list = route['legs'][0]['steps']
+        #     route_polylines = [polyline.decode(steps_list[i]["polyline"]["points"]) for i in range(0, len(steps_list))]
+        #     route_score = calculate_score(route_polylines)
+        #     routes_dict[str(route)] = route_score
+        # return routes_dict
 
     else:
         return {'error': 'Failed to fetch directions'}, 500

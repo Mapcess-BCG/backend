@@ -14,6 +14,9 @@ def goEatCurryWurst():
         print("Found obstacles:")
         print(obstacles)
 
+    return
+
+
 
 
 
