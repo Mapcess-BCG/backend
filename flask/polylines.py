@@ -2,7 +2,6 @@ import requests
 import polyline
 from flask import Flask, request, jsonify
 from constants import *
-from calculate_segment_score import calculate_score
 
 def get_polylines(origin, destination):
     # Default values for origin and destination

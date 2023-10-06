@@ -16,6 +16,7 @@ def getFeedbackAlongTheRoute(polyline):
 
     chunk_size = 50
 
+
     # Split the original array into multiple partitions
     partitions = list(split_array(polyline, chunk_size))
 
@@ -27,7 +28,6 @@ def getFeedbackAlongTheRoute(polyline):
             FilterExpression=filter_expression
         )['Items'])
         filter_expression = getFilterExpression(polyline[0])
-
 
     return result
     '''feedback_on_route = []

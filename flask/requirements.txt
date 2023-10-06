@@ -4,3 +4,4 @@ boto3
 polyline
 geopy
 requests
+numpy
