@@ -6,7 +6,7 @@ from pymongo import MongoClient
 
 from bcg_to_currywurst_test import goEatCurryWurst
 from integration import getAllRoutes
-from obstacles import getAllObstacles
+from obstacles import getAllObstacles, postObstacle
 from polylines import get_polylines
 from feedback import getFeedbackAlongTheRoute
 
@@ -40,6 +40,11 @@ def getRoute():
     origin = request.args.get('origin', type=str)
     destination = request.args.get('destination', type=str)
     return getAllRoutes(origin, destination)
+
+@app.route('/obstacle', methods=['POST'])
+def obstacle():
+    return postObstacle(request.get_json())
+
 
 if __name__ == "__main__":
     getAllObstacles()
