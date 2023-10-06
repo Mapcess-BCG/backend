@@ -29,26 +29,11 @@ def get_directions():
     # Get origin and destination from query parameters or use defaults
     origin = request.args.get('origin', type=str)
     destination = request.args.get('destination', type=str)
-
     return get_polylines(origin, destination)
-
-# start and end parameters are coordinates in form "lat:lon"
-# @app.route('/obstacles', methods=['GET'])
-# def getObstacles():
-#     start = request.args.get('start', type=str)
-#     end = request.args.get('end', type=str)
-#
-#     return jsonify({'obstacles': getAllObstaclesOnTheWay(start, end)})
 
 @app.route('/feedback', methods=['GET'])
 def getFeedback():
     return jsonify({'feedback': getFeedbackAlongTheRoute()})
-
-@app.route('/test', methods=['GET'])
-def runTest():
-    goEatCurryWurst()
-    return jsonify({'output': "worked"})
-
 
 @app.route('/routes', methods=['GET'])
 def getRoute():
