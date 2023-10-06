@@ -2,4 +2,4 @@ pymongo
 flask
 boto3
 polyline
-jsonify
+geopy
