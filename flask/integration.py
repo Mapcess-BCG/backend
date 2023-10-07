@@ -25,8 +25,6 @@ def getAllRoutes(origin, destination):
             obstacles.extend(getObstaclesForPolyline(line))
             feedback.extend(getFeedbackAlongTheRoute(line))
             print("Found obstacles:")
-            #print(obstacles)
-            #print(feedback)
 
         result.append({
             'polyline': route_polylines,
