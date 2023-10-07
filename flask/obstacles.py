@@ -50,8 +50,23 @@ def getObstaclesForPolyline(polyline):
         result.extend(obstacles)
 
         filter_expression = getFilterExpression(polyline[0])
+    
+    # Initialize the S3 client
+    s3 = boto3.client('s3')     
+    # List objects in a bucket
+    objects = s3.list_objects(Bucket='obs-images-bcg')
+    # Download an image
+    #images = s3.download_file('obs-images-bcg', 'obs_001.jpg', 'downloaded_image.jpg')
+    s3_url = s3.generate_presigned_url(
+        'get_object',
+        Params={'Bucket': 'obs-images-bcg', 'Key': 'obs_001.jpg'},
+        ExpiresIn=3600  # URL expiration time in seconds (adjust as needed)
+    )
+
+    print(f"Image URL: {s3_url}")
 
     return result
+
 
 
 def getAllObstacles():
@@ -84,7 +99,7 @@ def postObstacle(obstacle):
         TableName='Obstacles',
         Item=transformed_data
     )
-
+    
     return item
 
 def getObstacleImg():
