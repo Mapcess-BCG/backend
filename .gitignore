@@ -3,3 +3,4 @@ bcg
 flask/__pycache__
 .env
 bcgvenv/
+flask/credentials.py

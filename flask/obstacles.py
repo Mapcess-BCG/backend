@@ -36,7 +36,9 @@ def getObstaclesForPolyline(polyline):
         filter_expression = getFilterExpression(polyline[0])
     
     # Initialize the S3 client
-    s3 = boto3.client('s3')  
+    s3 = boto3.client('s3', region_name='eu-central-1',
+                    aws_access_key_id=aws_key,
+                    aws_secret_access_key=aws_secret)
     objects = s3.list_objects(Bucket='obs-images-bcg')   
     s3_url = s3.generate_presigned_url(
             'get_object',
