@@ -1,16 +1,17 @@
 import boto3
 from boto3.dynamodb.conditions import Attr
 from decimal import Decimal
+from credentials import *
 from polylines import get_polylines
 
 db = boto3.resource('dynamodb',
                     region_name='eu-central-1',
-                    aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
-                    aws_secret_access_key='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')
+                    aws_access_key_id=aws_key,
+                    aws_secret_access_key=aws_secret)
 db_client = boto3.client('dynamodb',
                         region_name='eu-central-1',
-                        aws_access_key_id='AKIAUOE65TFG6UZKDCWO',
-                        aws_secret_access_key='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')
+                        aws_access_key_id=aws_key,
+                        aws_secret_access_key=aws_secret)
 feedback_table = db.Table('Feedback')
 
 # get feedback along the route

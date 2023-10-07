@@ -3,12 +3,14 @@ import base64
 import boto3
 from boto3.dynamodb.conditions import Attr
 from decimal import Decimal
+from credentials import *
 
 # TODO: optimize -> move to the server file and make it global
+
 db = boto3.resource('dynamodb',
                     region_name='eu-central-1',
-                    aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-                    aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY'))
+                    aws_access_key_id=aws_key,
+                    aws_secret_access_key=aws_secret)
 obstacles_table = db.Table('Obstacles')
 
 
@@ -72,8 +74,8 @@ def getObstaclesForPolyline(polyline):
 def getAllObstacles():
     db = boto3.resource('dynamodb',
                         region_name='eu-central-1',
-                        aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-                        aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY'))
+                        aws_access_key_id=aws_key,
+                        aws_secret_access_key=aws_secret)
     tTable = db.Table('Obstacles')
     print(tTable.scan()['Items'])
 
@@ -92,8 +94,8 @@ def postObstacle(obstacle):
     
     db = boto3.client('dynamodb',
                         region_name='eu-central-1',
-                        aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'),
-                        aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY'))
+                        aws_access_key_id=aws_key,
+                        aws_secret_access_key=aws_secret)
 
     item = db.put_item(
         TableName='Obstacles',
