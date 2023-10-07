@@ -6,3 +6,4 @@ geopy
 requests
 python-dotenv
 numpy
+flask-cors

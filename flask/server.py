@@ -2,6 +2,7 @@
 import os
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from pymongo import MongoClient
 
 from bcg_to_currywurst_test import goEatCurryWurst
@@ -10,8 +11,8 @@ from obstacles import getAllObstacles, postObstacle, getObstacleImg
 from polylines import get_polylines
 from feedback import getFeedbackAlongTheRoute, postFeedback
 
-
 app = Flask(__name__)
+CORS(app)
 
 client = MongoClient("mongo:27017")
 
@@ -31,6 +32,7 @@ def get_directions():
     destination = request.args.get('destination', type=str)
     return get_polylines(origin, destination)
 
+# we get feedback with route
 @app.route('/feedback', methods=['GET'])
 def getFeedback():
     return jsonify({'feedback': getFeedbackAlongTheRoute()})
