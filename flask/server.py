@@ -7,7 +7,7 @@ from pymongo import MongoClient
 
 from bcg_to_currywurst_test import goEatCurryWurst
 from integration import getAllRoutes
-from obstacles import getAllObstacles, postObstacle, getObstacleImg
+from obstacles import getAllObstacles, postObstacle
 from polylines import get_polylines
 from feedback import getFeedbackAlongTheRoute, postFeedback
 
