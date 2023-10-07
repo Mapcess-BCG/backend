@@ -56,6 +56,8 @@ def getObstaclesForPolyline(polyline):
             ExpiresIn=3600  # URL expiration time in seconds (adjust as needed)
         )
 
+        obstacle['img_url'] = s3_url
+
     print(f"Image URL: {s3_url}")
 
     return result
