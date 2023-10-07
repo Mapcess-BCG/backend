@@ -76,6 +76,9 @@ def calculate_score(polyline):
         accessibility_score = (mean_elevation + mean_feedback) / 2
     else:
         accessibility_score = np.mean(elevation_scores)
+    
+    if accessibility_score == None:
+        accessibility_score = 1
 
     return accessibility_score
 
